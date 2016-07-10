@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=divice-width, initial-scale=1, user-scalable=no" />
+		<title>Hay Game</title>
+		<script src="js/jquery_3.0.0.min.js"></script>
+		<script src="js/hg.js"></script>
+				
+		<link rel="stylesheet/less" href="less/hg.less" />
+		<link rel="stylesheet" href="css/hg.css" />
+		<script src="js/less_2.6.1.js"></script>
+		
+		<link rel="icon" href="img/hg_icon.png" />
+		<link rel="shortcut icon" href="img/hg_icon.png" />
+		
+	</head>
+	<body>
+		<div id="divLeft">
+			<aside id="asideLeft">	
+				<canvas id="canvas_personalInfo"></canvas>
+				<div id="headPhotoBorder">
+					<div id="headPhoto">
+						<img src="img/headPhoto.jpg" />
+					</div>
+				</div>
+				<div id="myName">宦奥运</div>
+			</aside>
+			<div id="div_myIntroduction" class="div_personalInfoItem">
+				<canvas id="canvas_myIntroduction" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_myStudy" class="div_personalInfoItem">
+				<canvas id="canvas_myStudy" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_myWorks" class="div_personalInfoItem">
+				<canvas id="canvas_myWorks" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_mySensibility" class="div_personalInfoItem">
+				<canvas id="canvas_mySensibility" class="canvas_personalInfoItem"></canvas>
+			</div>
+		</div>
+		
+		<div id="divMiddle">
+			<div id="div_content">
+				<img class="closeButton" src="img/closeButton_normal.png" />
+			</div>
+		</div>
+		
+		<div id="divRight">
+			<aside id="game"></aside>
+			<aside id="asideRight">
+				<div id="div_myApplication"></div>
+				<div id="div_moreApplication">More</div>
+				<!--<div id="div_applicationCover"></div>-->
+				<!--<canvas id="canvas_myApplication"></canvas>-->
+			</aside>
+		</div>
+		
+		<div id="bg"></div>
+		
+	</body>
+</html>
