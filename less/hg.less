@@ -1,0 +1,214 @@
+@imgURL: "../img";
+
+body {
+	-webkit-user-select: none;
+	-o-user-select: none;	
+	-moz-user-select: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+#divLeft,
+#divRight {
+	width: 28%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+#divLeft {
+
+	.div_personalInfoItem {
+		height: 9%;
+		width: 0;
+		position: absolute;
+		overflow: hidden;
+		/*
+			2D变形对jquery动画有影响
+		*/
+		.canvas_personalInfoItem {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+}
+#div_myIntroduction {
+	left: 50%;
+	top: 20%;
+}
+#div_myStudy {
+	left: 38%;
+	top: 32%
+}
+#div_myWorks {
+	left: 26%;
+	top: 44%;
+}
+#div_mySensibility {
+	left: 14%;
+	top: 56%;
+}
+#divMiddle {
+	width: 44%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+#div_content {
+	width: 80%;
+	background: url(../img/bg_content.png);
+	background-size: 100% 100%;
+	margin: 50% auto;
+	border-radius: 4%;
+	overflow: hidden;
+	position: relative;
+}
+.closeButton {
+	width: 20px;
+	height: 20px;
+	color: #fff;
+	font-family: "Arial";
+	font-weight: bold;
+	font-size: 14px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+#article_show {
+	width: 50%;
+	height: 50%;
+	position:	absolute;
+	left: 25%;
+	top: 25%;
+	color: #333;
+	text-indent: 30px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+#game {
+	width: 90%;
+	height: auto;
+	font-family: "微软雅黑";
+	margin-top: 5%;
+	margin-left: 5%;
+	opacity: 0;
+	filter: alpha(opacity=0);
+		
+	h3 {
+		color: #fff;
+	}
+	
+	article {
+		
+		
+		div {
+			float: left;
+			margin-left: 4%;
+			
+			a {
+				color: #fff;
+				text-decoration: none;
+				outline: none;
+				
+				img {
+					border-radius: 13%;
+					box-shadow: 0 0 3px #333;
+				}
+				
+				h5 {
+					margin-top: 0;
+					margin-left: 12%;
+				}
+			}
+		}
+	}
+}
+#asideLeft,
+#asideRight {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+#asideLeft {
+	left: -100%;
+	top: 0;
+	position: relative;
+}
+#headPhotoBorder {
+	width: 42%;
+	height: 25%;
+	border-radius: 100%;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	overflow: hidden;
+	background-color: #fc0;
+	box-shadow: 2px 2px 3px #666 inset;
+}
+#headPhoto {
+	width: 90%;
+	height: 90%;
+	overflow: hidden;
+	border-radius: 100%;
+	margin: 5% auto;
+	position: relative;
+	box-shadow: 2px 2px 3px #666;
+	
+	img {
+		width: 170%;
+		height: 100%;
+		position: absolute;
+		left: -3%;
+		top: 0;
+	}
+}
+#myName {
+	color: #fc0;
+	font-family: "微软雅黑";
+	font-size: 190%;
+	position: absolute;
+	left: 47%;
+	top: 1%;
+}
+#asideRight {
+	height: 50%;
+	right: -100%;
+	top: 50%;
+}
+#div_myApplication {
+	border-radius: 100%;
+	background-color: #fff;
+	position: absolute;
+	box-shadow: 2px 2px 5px #444 inset;
+}
+#div_moreApplication {
+	border-radius: 100%;
+	background-color: #fc0;
+	position: absolute;
+	box-shadow: 0 0 3px #333;
+	color: #fff;
+}
+#bg {
+	width: 100%;
+	height: auto;
+	background: url("@{imgURL}/background_01.png") no-repeat;
+	background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	overflow: hidden;
+	position: absolute;
+	left: -30px;
+	top: -30px;
+	z-index: -2;
+}
+
+
+
+
+
+
+
+
+
+
