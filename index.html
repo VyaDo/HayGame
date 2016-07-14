@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		
+		<title>Hay Game</title>
+		
+		<script src="js/jquery_3.0.0.min.js"></script>
+		<script src="js/hg.js"></script>
+		<script src="js/musicApp.js"></script>
+		
+		<link rel="stylesheet/less" href="less/hg.less" />
+		<script src="js/less_2.6.1.js"></script>
+		<link rel="stylesheet" href="css/musicApp.css" />
+		
+		<link rel="icon" href="img/hg_icon.png" />
+		<link rel="shortcut icon" href="img/hg_icon.png" />
+		
+	</head>
+	<body>
+		<div id="divLeft">
+			<aside id="asideLeft">	
+				<canvas id="canvas_personalInfo"></canvas>
+				<div id="headPhotoBorder">
+					<div id="headPhoto">
+						<img src="img/headPhoto.jpg" />
+					</div>
+				</div>
+				<div id="myName">宦奥运</div>
+			</aside>
+			<div id="div_myIntroduction" class="div_personalInfoItem">
+				<canvas id="canvas_myIntroduction" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_myStudy" class="div_personalInfoItem">
+				<canvas id="canvas_myStudy" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_myWorks" class="div_personalInfoItem">
+				<canvas id="canvas_myWorks" class="canvas_personalInfoItem"></canvas>
+			</div>
+			<div id="div_mySensibility" class="div_personalInfoItem">
+				<canvas id="canvas_mySensibility" class="canvas_personalInfoItem"></canvas>
+			</div>
+		</div>
+		
+		<div id="divMiddle">
+			<div id="div_content">
+				<img class="closeButton" src="img/closeButton_normal.png" />
+				<article id="article_show"></article>
+			</div>
+		</div>
+		
+		<div id="divRight">
+			<aside id="asideRight">
+				<div id="div_myApplication">
+					<div class="app" id="draw">
+						<img src="img/draw_icon.png" />
+					</div>
+					<div class="app" id="music">
+						<img src="img/music_icon.png" />
+					</div>
+					<div class="app"></div>
+					<div class="app"></div>
+					<div class="app"></div>
+					<div class="app"></div>
+					<div class="app"></div>
+					<div class="app"></div>
+				</div>
+				<div id="div_moreApplication">More</div>
+				<!--<div id="div_applicationCover"></div>-->
+				<!--<canvas id="canvas_myApplication"></canvas>-->
+			</aside>
+			<aside id="game">
+					<h3>My Favorite Games</h3>
+					<article>
+						<div style="margin-left: 0;">
+							<a id="danji" href="danjiyouxi.html">
+								<img src="img/djgame.png" />
+								<h5>单机游戏</h5>
+							</a>
+						</div>
+						<div>
+							<a id="wangluo" href="wangluoyouxi.html">
+								<img src="img/wlgame.png" />
+								<h5>网络游戏</h5>
+							</a>
+						</div>
+						<div>
+							<a id="shouji" href="shoujiyouxi.html">
+								<img src="img/sjgame.png" />
+								<h5>手机游戏</h5>
+							</a>
+						</div>
+						<div>
+							<a id="jieji" href="jiejiyouxi.html">
+								<img src="img/jjgame.png" />
+								<h5>街机游戏</h5>
+							</a>
+						</div>
+						
+					</article>
+				</aside>
+		</div>
+		
+		<div id="bg"></div>
+		<div id="screenCover"></div>
+		
+		<div id="musicApp">
+			<canvas id="yp"></canvas>
+			<div id="key_box">
+				<div id="tune">
+					<ul>
+						<li id="yd_a" class="yd">A调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W</li>
+						<li id="yd_a" class="yd">B调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E</li>
+						<li id="yd_a" class="yd">C调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R</li>
+						<li id="yd_a" class="yd">D调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T</li>
+						<li id="yd_a" class="yd">E调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y</li>
+						<li id="yd_a" class="yd">F调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U</li>
+						<li id="yd_a" class="yd">G调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I</li>
+					</ul>
+				</div>
+				<div id="key">
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+					<div class="keybtn">
+						<img class="bg_keybtn" src="img/bg_keyBtn.png" />
+					</div>
+				</div>
+				<article class="extra">
+					<div class="back_music">
+						<img class="back" src="img/icon_orange.png" />
+					</div>
+				</article>
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
