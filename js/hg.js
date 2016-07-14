@@ -367,22 +367,7 @@ $(function () {
 	
 	
 	$("#div_myStudy").on("click", function () {
-		$.ajax({
-			url: "json/myIntroduction.json",
-			dataType: "json",
-			success: function(data, statusText, jqXHR) {
-				var j = $.parseJSON(jqXHR.responseText);
-				if (j[1]["text"] == "") {
-					$("#list").html("<li>一篇还没有。。</li>");
-				} else {
-					var t = "";
-					for (var i = 0; i < j[1]["text"].length; i ++) {
-						t += "<li>" + j[1]["text"][i] + "</li>";
-					};
-					$("#list").html(t);
-				};
-			},
-		});
+		$("#articles").trigger("click");
 		$("#screenCover").css({
 			display: "block",
 		});
