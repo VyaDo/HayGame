@@ -1,0 +1,90 @@
+/* CSS Document */
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#yp {
+	width: 100%;
+	height: 50%;
+	background-color: #fff;
+	display: block;
+}
+#tune {
+	width: 12%;
+	height: 95%;
+	float: left;
+	padding: 0 1.5%;
+}
+.yd_box {
+	width: 100%;
+	height: 11.5%;
+	margin-bottom: 5%;
+	background-color: #ffc;
+	box-shadow: 0 0 2px #333;
+	cursor: pointer;
+}
+.yd_box span {
+	color: #333;
+	font-size: 120%;
+	font-family: "微软雅黑";
+	line-height: 180%;
+	margin-left: 15%;
+}
+.yd_box span.hk {
+	margin-left: 35%;
+}
+#key_box {
+	width: 100%;
+	height: 49%;
+	background-color: maroon;
+	padding-top: 0.5%;
+	box-shadow: 0 -5px 3px #666;
+}
+#key {
+	width: 71%;
+	height: 95%;
+	float: left;
+}
+#key .keybtn {
+	background-color: #fff;
+	float: left;
+	margin-left: 1px;
+	border-radius: 5px;
+	box-shadow: 0 0 3px #333;
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+}
+#key .keybtn .bg_keybtn	{
+	width: 700%;
+	height: 200%;
+	position: absolute;
+}
+.extra {
+	width: 14%;
+	height: 95%;
+	float: left;
+	position: relative;
+}
+.extra  .back_music{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	overflow: hidden;
+	bottom: 2%;
+	right: 5%;
+}
+.back{
+	margin-left: -420px;
+	margin-top: -120px;
+}
+
+
+
+
+
+
+
+
