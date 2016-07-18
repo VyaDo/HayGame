@@ -39,15 +39,7 @@ $(function () {
 	});
 	
 	
-	$("#musicApp").css({
-		width: screenW,
-		height: screenH,
-		top: 0,
-		left: screenW,
-	});
-	
-	
-	$("#screenCover").css({
+	$("#cloud").prop({
 		width: screenW,
 		height: screenH,
 	});
@@ -68,11 +60,6 @@ $(function () {
 	
 	$("#divLeft .div_personalInfoItem .canvas_personalInfoItem").prop({
 		width: dLW * 0.5,
-		height: dLH * 0.09,
-	});
-	
-	
-	$("#divLeft .div_personalInfoItem .div_shadow").css({
 		height: dLH * 0.09,
 	});
 	
@@ -120,6 +107,7 @@ $(function () {
 			});
 		},
 	});
+	
 	
 	(function () {
 		var n = 0;
@@ -236,12 +224,85 @@ $(function () {
 	(function init() {
 		// 背景动画 & 侧栏动画
 		var gen;
+		var fca;
+		
+		var img = new Image();
+		img.src = "img/cloud2.png";
+		
+		var ac = [
+			{
+				cx: 200,
+				cy: 100,
+				cw: img.width * 0.8,
+				ch: img.height * 0.8,
+			},
+			{
+				cx: 600,
+				cy: 50,
+				cw: img.width * 0.6,
+				ch: img.height * 0.6,
+			},
+			{
+				cx: 700,
+				cy: 200,
+				cw: img.width * 0.4,
+				ch: img.height * 0.4,
+			},
+			{
+				cx: 1040,
+				cy: 80,
+				cw: img.width * 0.4,
+				ch: img.height * 0.4,
+			},
+			{
+				cx: 1160,
+				cy: 160,
+				cw: img.width * 0.5,
+				ch: img.height * 0.5,
+			},
+			{
+				cx: 1460,
+				cy: 100,
+				cw: img.width * 0.8,
+				ch: img.height * 0.8,
+			},
+			{
+				cx: 1860,
+				cy: 50,
+				cw: img.width * 0.6,
+				ch: img.height * 0.6,
+			},
+			{
+				cx: 1960,
+				cy: 200,
+				cw: img.width * 0.4,
+				ch: img.height * 0.4,
+			},
+			{
+				cx: 2300,
+				cy: 80,
+				cw: img.width * 0.4,
+				ch: img.height * 0.4,
+			},
+			{
+				cx: 2420,
+				cy: 160,
+				cw: img.width * 0.5,
+				ch: img.height * 0.5,
+			}
+		];
+		
+		fca = cloudAnim(ac, img);
 		
 		$(document).one("mousemove", function (e) { 
 			var _arguments = arguments;
 			
 			if (gen) {
 				clearTimeout(gen);
+			};
+			
+			if (fca) {
+				clearInterval(fca);
 			};
 			
 			$("#bg").animate({
@@ -296,6 +357,8 @@ $(function () {
 									width: screenW + incr,
 									height: screenH + incr,
 								});
+								
+								fca = cloudAnim(ac, img);
 							}, 60000);
 							$(document).one("mousemove", _arguments.callee);
 						};		
@@ -579,6 +642,36 @@ $(function () {
 	});
 	
 	
+	// 云动画
+	function cloudAnim(ac, img) {
+
+		var	c = document.getElementById("cloud"),
+					ctx = c.getContext("2d");
+				
+		var cloudAnimate = setInterval(function () {
+			ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
+			for (var i = 0; i < ac.length; i ++) {
+				ac[i]["cx"] -= 3;
+				if (ac[i]["cx"] < - ac[0]["cw"]) {
+					ac[i]["cx"] = 2430;
+				}
+				drawCloud(i);
+			};
+		}, 40);
+		
+		function drawCloud(n) {
+			ctx.drawImage(img, ac[n]["cx"], ac[n]["cy"], ac[n]["cw"], ac[n]["ch"]);
+		};
+		
+		return cloudAnimate;
+	};
+	
+	
+	
+	
+	
+				
+				
 	/*// 关闭按钮效果
 	(function () {
 		var div_content = $("#div_content"),
