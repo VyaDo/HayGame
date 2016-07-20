@@ -63,13 +63,6 @@ $(function () {
 		height: dLH * 0.09,
 	});
 	
-	
-	/*$("#canvas_myApplication").prop({
-		width: $("#asideRight").width(),
-		height: $("#asideRight").height(), 
-	});*/
-	
-	
 	$("#div_myApplication").css({
 		width: aRW * 0.6 * 2,
 		height: aRW * 0.6 * 2,
@@ -77,151 +70,7 @@ $(function () {
 		bottom: -aRW * 0.6 * 0.5,
 	});
 	
-	
-	// .app定位
-	$(".app").css({
-		left: aRW * 0.6 - 32,
-		top: aRW * 0.066,
-		transformOrigin: "32px " + aRW * 0.534 + "px",
-	}).each(function (index) {
-		$(this).css({
-			transform: "rotate(" + (-360 / $(".app").length * (index + 0.5)) + "deg)",
-		});
-	}).hover(function () {
-		$(this).css({
-			boxShadow: "0 0 5px #111",
-		});
-	}, function () {
-		$(this).css({
-			boxShadow: "none",			
-		});
-	}).on({
-		mousedown: function () {
-			$(this).css({
-				boxShadow: "0 0 2px #111",			
-			});
-		},
-		mouseup: function () {
-			$(this).css({
-				boxShadow: "0 0 5px #111",
-			});
-		},
-	});
-	
-	
 	(function () {
-		var n = 0;
-		$("#div_myApplication").on("mousedown", function (ed) {
-			$(this).on("mousemove", function (em) {
-				if (em.pageY - ed.pageY > 30) {
-					++n;
-					$(this).off("mousemove");
-					$(this).css({
-						transform: "rotate(" + (-60 * n) + "deg)",
-					});
-				};
-				if (em.pageY - ed.pageY < -30) {
-					--n;
-					$(this).off("mousemove");
-					$(this).css({
-						transform: "rotate(" + (-60 * n) + "deg)",
-					});
-				};
-			});
-			$("#div_myApplication").on("mouseup", function () {
-				$(this).off("mousemove");
-			});
-		});
-	})();
-	
-	
-	$("#music").on("click", function () {
-		$("#musicApp").animate({
-			left: 0,
-		});
-	});
-	
-	
-	$("#div_moreApplication").css({
-		width: aRW * 0.55,
-		height: aRW * 0.3 * 2,
-		right: -aRW * 0.3,
-		bottom: 0,
-		fontFamily: "微软雅黑",
-		fontWeight: "bold",
-		fontSize: aRW * 0.07,
-		paddingLeft: aRW * 0.05,
-		lineHeight: aRW * 0.022,
-		cursor: "pointer",
-	}).hover(function () {
-		$(this).css({
-			backgroundColor: "#f90",
-		});
-	}, function () {
-		$(this).css({
-			backgroundColor: "#fc0",
-		});
-	}).on({
-		mousedown: function () {
-			$(this).css({
-				boxShadow: "0 0 1px #333",
-			});
-		},
-		mouseup: function () {
-			$(this).css({
-				boxShadow: "0 0 3px #333",
-			});
-		},
-	});
-	
-	
-	$("#div_content").css({
-		height: 0,
-	});
-	
-	
-	$("#game").find("article").find("img").css({
-		width: $("#game").width() * 0.2,
-		height: $("#game").width() * 0.2,
-	})
-	
-	
-	$("#game").find("div").hover(function () {
-		$(this).find("img").css({
-			boxShadow: "0 0 1px #333",
-		});
-		$(this).find("h5").css({
-			color: "#ff8",
-		});
-	}, function () {
-		$(this).find("img").css({
-			boxShadow: "0 0 3px #333",
-		});
-		$(this).find("h5").css({
-			color: "#fff",
-		});
-	});
-	
-	
-	// 头像
-	$("#headPhoto img").on("mouseover", function () {
-		$(this).animate({
-			width: "175%",
-			height: "105%",
-			left: "-8%",
-			top: "-4%",
-		});
-	}).on("mouseout", function () {
-		$(this).animate({
-			width: "170%",
-			height: "100%",
-			left: "-3%",
-			top: 0,
-		});
-	});
-	
-	
-	(function init() {
 		// 背景动画 & 侧栏动画
 		var gen;
 		var fca;
@@ -292,7 +141,9 @@ $(function () {
 			}
 		];
 		
-		fca = cloudAnim(ac, img);
+		img.onload = function () {
+			fca = cloudAnim(ac, img);
+		};
 		
 		$(document).one("mousemove", function (e) { 
 			var _arguments = arguments;
@@ -370,6 +221,25 @@ $(function () {
 	})();
 	
 	
+	// 头像
+	$("#headPhoto img").on("mouseover", function () {
+		$(this).clearQueue();
+		$(this).animate({
+			width: "175%",
+			height: "105%",
+			left: "-8%",
+			top: "-4%",
+		});
+	}).on("mouseout", function () {
+		$(this).animate({
+			width: "170%",
+			height: "100%",
+			left: "-3%",
+			top: 0,
+		});
+	});
+	
+	
 	// 个人信息的canvas	
 	(function () {
 		var cWidth = $("#canvas_personalInfo").width(),
@@ -438,8 +308,9 @@ $(function () {
 	});
 	
 	
-	$("#screenCover").on("click", function () {
+	$("#screenCover").on("click", function (e) {
 		$("#div_stu").fadeOut(500);
+		$("#moreAppWin").fadeOut(500);
 		$("#article_show").animate({
 			opacity: 0,
 		}, {
@@ -527,7 +398,7 @@ $(function () {
 			
 			
 			// 个人信息Item点击事件2
-			$(document).on("mouseup", function () {
+			$("#" + id).on("mouseup", function () {
 				ctx.clearRect(0, 0, $("#divLeft").width() * 0.5, $("#divLeft").height() * 0.09);
 				ctx.fillStyle = bgColor;
 				ctx.shadowColor = "#666";
@@ -635,6 +506,196 @@ $(function () {
 	});
 	
 	
+	$("#game").find("article").find("img").css({
+		width: $("#game").width() * 0.2,
+		height: $("#game").width() * 0.2,
+	})
+	
+	$("#game").find("div").hover(function () {
+		$(this).find("img").css({
+			boxShadow: "0 0 1px #333",
+		});
+		$(this).find("h5").css({
+			color: "#ff8",
+		});
+	}, function () {
+		$(this).find("img").css({
+			boxShadow: "0 0 3px #333",
+		});
+		$(this).find("h5").css({
+			color: "#fff",
+		});
+	});
+	
+	(function () {
+		var n = 0;
+		$("#div_myApplication").on("mousedown", function (ed) {
+			$(this).on("mousemove", function (em) {
+				if (em.pageY - ed.pageY > 30) {
+					++n;
+					$(this).off("mousemove");
+					$(this).css({
+						transform: "rotate(" + (-60 * n) + "deg)",
+					});
+				};
+				if (em.pageY - ed.pageY < -30) {
+					--n;
+					$(this).off("mousemove");
+					$(this).css({
+						transform: "rotate(" + (-60 * n) + "deg)",
+					});
+				};
+			});
+			$("#div_myApplication").on("mouseup", function () {
+				$(this).off("mousemove");
+			});
+		});
+	})();
+	
+	// .app定位
+	$(".app").css({
+		left: aRW * 0.6 - 32,
+		top: aRW * 0.066,
+		transformOrigin: "32px " + aRW * 0.534 + "px",
+	}).each(function (index) {
+		$(this).css({
+			transform: "rotate(" + (-360 / $(".app").length * (index + 0.5)) + "deg)",
+		});
+	}).hover(function () {
+		$(this).css({
+			boxShadow: "0 0 5px #111",
+		});
+	}, function () {
+		$(this).css({
+			boxShadow: "none",			
+		});
+	}).on({
+		mousedown: function () {
+			$(this).css({
+				boxShadow: "0 0 2px #111",			
+			});
+		},
+		mouseup: function () {
+			$(this).css({
+				boxShadow: "0 0 5px #111",
+			});
+		},
+	});
+	
+	$("#div_moreApplication").css({
+		width: aRW * 0.55,
+		height: aRW * 0.3 * 2,
+		right: -aRW * 0.3,
+		bottom: 0,
+		fontFamily: "微软雅黑",
+		fontWeight: "bold",
+		fontSize: aRW * 0.07,
+		paddingLeft: aRW * 0.05,
+		lineHeight: aRW * 0.022,
+		cursor: "pointer",
+	}).hover(function () {
+		$(this).css({
+			backgroundColor: "#f90",
+		});
+	}, function () {
+		$(this).css({
+			backgroundColor: "#fc0",
+		});
+	}).on({
+		mousedown: function () {
+			$(this).css({
+				boxShadow: "0 0 1px #333",
+			});
+		},
+		mouseup: function () {
+			$(this).css({
+				boxShadow: "0 0 3px #333",
+			});
+			$("#screenCover").css({
+				display: "block",
+			});
+			$("#moreAppWin").fadeIn(500);
+		},
+	});
+	
+	$("span.arrow").on("mousedown", function () {
+		$(this).css({
+			boxShadow: "0 0 2px #666",
+		});
+		$(document).on("mouseup", function () {
+			$("span.arrow").css({
+				boxShadow: "0 0 5px #333",
+			});
+		});
+	});
+	
+	$("#leftArrow").on("click", function () {
+		var $divac = $("div.ac");
+		$divac.each(function () {
+			$(this).animate({
+				left: $(this).position().left - $(this).width(),
+			}, {
+				done: function () {
+					if ($(this).position().left < -$(this).width() * 1.5) {
+						$(this).css({
+							left: $(this).width(),
+						});
+					};
+				},
+			});
+		});
+	});
+	
+	$("#rightArrow").on("click", function () {
+		var $divac = $("div.ac");
+		$divac.each(function () {
+			$(this).animate({
+				left: $(this).position().left + $(this).width(),
+			}, {
+				done: function () {
+					if ($(this).position().left > $(this).width() * 1.5) {
+						$(this).css({
+							left: -$(this).width(),
+						});
+					};
+				},
+			});
+		});
+	});
+	
+	$(".ac .appE").each(function () {
+		$(this).hover(function () {
+			$(this).css({
+				boxShadow: "0 0 5px #666",
+			});
+		}, function () {
+			$(this).css({
+				boxShadow: "none",
+			});
+		}).on("mousedown", function () {
+			$(this).css({
+				boxShadow: "0 0 2px #333",
+			});
+		}).on("mouseup", function () {
+			$(this).css({
+				boxShadow: "0 0 5px #666",
+			});
+		});
+	});
+	
+	$("#gangQin").on("click", function () {
+		$("#musicApp").animate({
+			left: 0,
+		});
+	});
+	
+	$("#music").on("click", function () {
+		$("#musicApp").animate({
+			left: 0,
+		});
+	});
+	
+	
 	$("#bgChange").add("#lvMessage").hover(function () {
 		$(this).find("img").prop("src", "img/icon_orange.png");
 	}, function () {
@@ -644,10 +705,8 @@ $(function () {
 	
 	// 云动画
 	function cloudAnim(ac, img) {
-
 		var	c = document.getElementById("cloud"),
 					ctx = c.getContext("2d");
-				
 		var cloudAnimate = setInterval(function () {
 			ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
 			for (var i = 0; i < ac.length; i ++) {
@@ -655,61 +714,12 @@ $(function () {
 				if (ac[i]["cx"] < - ac[0]["cw"]) {
 					ac[i]["cx"] = 2430;
 				}
-				drawCloud(i);
+				ctx.drawImage(img, ac[i]["cx"], ac[i]["cy"], ac[i]["cw"], ac[i]["ch"]);
 			};
 		}, 40);
-		
-		function drawCloud(n) {
-			ctx.drawImage(img, ac[n]["cx"], ac[n]["cy"], ac[n]["cw"], ac[n]["ch"]);
-		};
-		
 		return cloudAnimate;
 	};
-	
-	
-	
-	
-	
-				
-				
-	/*// 关闭按钮效果
-	(function () {
-		var div_content = $("#div_content"),
-					art = $("#article_show"),
-					closeButton = $(".closeButton"),
-					cover = $("#screenCover");
-		closeButton.hover(function () {
-			$(this).prop("src", "img/closeButton_hover.png");
-		}, function () {
-			$(this).prop("src", "img/closeButton_normal.png");
-		}).on("mousedown", function () {
-			$(this).prop("src", "img/closeButton_down.png");
-		}).on("mouseup", function () {
-			$(this).prop("src", "img/closeButton_hover.png");
-			
-		});
-	})();*/
-	
-	
-	
-	// 右侧转盘
-	/*(function () {
-		var w = $("#asideRight").width(),
-		      h = $("#asideRight").height(),
-					c = document.getElementById("canvas_myApplication"),
-					ctx = c.getContext("2d");
-		ctx.fillStyle = "#fff";
-		ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-		ctx.shadowBlur = 5;
-		ctx.shadowColor = "#666";
-		ctx.shadowOffsetY = 3;	
-		ctx.translate(w, h * 0.5);
-		ctx.beginPath();
-		ctx.arc(0, 0, w * 0.6, 0, Math.PI * 2);
-		ctx.closePath();
-		ctx.stroke();
-		ctx.fill();
-	})();*/
+
 	
 });
 
