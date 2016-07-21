@@ -715,20 +715,18 @@ $(function () {
 	// 云动画
 	function cloudAnim(a, p) {
 		var cloudAnimate;
-		p.onload = function () {
-			var	c = document.getElementById("cloud"),
-						ctx = c.getContext("2d");
-			cloudAnimate = window.setInterval(function () {
-				ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
-				for (var i = 0; i < a.length; i ++) {
-					a[i]["cx"] -= 3;
-					if (a[i]["cx"] < - a[0]["cw"]) {
-						a[i]["cx"] = 2430;
-					}
-					ctx.drawImage(p, a[i]["cx"], a[i]["cy"], a[i]["cw"], a[i]["ch"]);
-				};
-			}, 40);
-		};
+		var	c = document.getElementById("cloud"),
+					ctx = c.getContext("2d");
+		cloudAnimate = window.setInterval(function () {
+			ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
+			for (var i = 0; i < a.length; i ++) {
+				a[i]["cx"] -= 3;
+				if (a[i]["cx"] < - a[0]["cw"]) {
+					a[i]["cx"] = 2430;
+				}
+				ctx.drawImage(p, a[i]["cx"], a[i]["cy"], a[i]["cw"], a[i]["ch"]);
+			};
+		}, 40);
 		return cloudAnimate;
 	};
 
