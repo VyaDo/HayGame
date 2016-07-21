@@ -86,74 +86,76 @@ $(function () {
 		// 背景动画 & 侧栏动画
 		var gen;
 		var fca;
+		var ac;
 		
 		var img = new Image();
 		img.src = "img/cloud2.png";
 		
-		var ac = [
-			{
-				cx: 200,
-				cy: 100,
-				cw: img.width * 0.8,
-				ch: img.height * 0.8,
-			},
-			{
-				cx: 600,
-				cy: 50,
-				cw: img.width * 0.6,
-				ch: img.height * 0.6,
-			},
-			{
-				cx: 700,
-				cy: 200,
-				cw: img.width * 0.4,
-				ch: img.height * 0.4,
-			},
-			{
-				cx: 1040,
-				cy: 80,
-				cw: img.width * 0.4,
-				ch: img.height * 0.4,
-			},
-			{
-				cx: 1160,
-				cy: 160,
-				cw: img.width * 0.5,
-				ch: img.height * 0.5,
-			},
-			{
-				cx: 1460,
-				cy: 100,
-				cw: img.width * 0.8,
-				ch: img.height * 0.8,
-			},
-			{
-				cx: 1860,
-				cy: 50,
-				cw: img.width * 0.6,
-				ch: img.height * 0.6,
-			},
-			{
-				cx: 1960,
-				cy: 200,
-				cw: img.width * 0.4,
-				ch: img.height * 0.4,
-			},
-			{
-				cx: 2300,
-				cy: 80,
-				cw: img.width * 0.4,
-				ch: img.height * 0.4,
-			},
-			{
-				cx: 2420,
-				cy: 160,
-				cw: img.width * 0.5,
-				ch: img.height * 0.5,
-			}
-		];
-		
-		fca = cloudAnim(ac, img);
+		img.onload = function () {
+			ac = [
+				{
+					cx: 200,
+					cy: 100,
+					cw: img.width * 0.8,
+					ch: img.height * 0.8,
+				},
+				{
+					cx: 600,
+					cy: 50,
+					cw: img.width * 0.6,
+					ch: img.height * 0.6,
+				},
+				{
+					cx: 700,
+					cy: 200,
+					cw: img.width * 0.4,
+					ch: img.height * 0.4,
+				},
+				{
+					cx: 1040,
+					cy: 80,
+					cw: img.width * 0.4,
+					ch: img.height * 0.4,
+				},
+				{
+					cx: 1160,
+					cy: 160,
+					cw: img.width * 0.5,
+					ch: img.height * 0.5,
+				},
+				{
+					cx: 1460,
+					cy: 100,
+					cw: img.width * 0.8,
+					ch: img.height * 0.8,
+				},
+				{
+					cx: 1860,
+					cy: 50,
+					cw: img.width * 0.6,
+					ch: img.height * 0.6,
+				},
+				{
+					cx: 1960,
+					cy: 200,
+					cw: img.width * 0.4,
+					ch: img.height * 0.4,
+				},
+				{
+					cx: 2300,
+					cy: 80,
+					cw: img.width * 0.4,
+					ch: img.height * 0.4,
+				},
+				{
+					cx: 2420,
+					cy: 160,
+					cw: img.width * 0.5,
+					ch: img.height * 0.5,
+				}
+			];
+			fca = cloudAnim(ac, img);
+		};
 		
 		$(document).one("mousemove", function (e) { 
 			var _arguments = arguments;
@@ -724,6 +726,7 @@ $(function () {
 				if (a[i]["cx"] < - a[0]["cw"]) {
 					a[i]["cx"] = 2430;
 				}
+				
 				ctx.drawImage(p, a[i]["cx"], a[i]["cy"], a[i]["cw"], a[i]["ch"]);
 			};
 		}, 40);
