@@ -35,28 +35,43 @@ $(function () {
 			$(this).css({
 				width: screenW * 0.1,
 				height: screenH * 0.95 * 0.5,
-				lineHeight: screenH * 0.95 * 0.5 + "px",
 				
 			}).hover(function () {
-				
 				$(this).css({
 					border: "3px solid pink",
 					width: screenW * 0.1 - 6,
 					height: screenH * 0.95 * 0.5 - 6,
-					
 				});
-				
-				$(this).find("img").css("left", -$("#key .keybtn").outerWidth() * index + $("#key .keybtn").outerWidth() * 0.045 * index);
 				
 			}, function () {
-				
 				$(this).css({
-					border: 0,
+					border: "none",
 					width: screenW * 0.1,
 					height: screenH * 0.95 * 0.5,
+					boxShadow: "0 0 3px #333",
 				});
 				
-				$(this).find("img").css("left", -$("#key .keybtn").outerWidth() * index);
+				$(this).find("img").attr({
+					src: $(this).find("img").attr("data-src2"),
+				});
+				
+				$(this).one("mousedown", function () {
+					_arguments = arguments;
+					
+					$(this).css({
+						border: 0,
+						width: screenW * 0.1,
+						height: screenH * 0.95 * 0.5,
+						boxShadow: "0 0 8px #333 inset",
+					});
+					
+					$(this).find("img").attr({
+						src: $(this).find("img").attr("data-src"),
+					});
+					
+					myAudio.src = "audio/raw/" + diao + (index + 1) + ".ogg";
+					myAudio.play();
+				});
 				
 			}).one("mousedown", function () {
 				_arguments = arguments;
@@ -68,9 +83,8 @@ $(function () {
 					boxShadow: "0 0 8px #333 inset",
 				});
 				
-				$(this).find("img").css({
-					left: -$("#key .keybtn").outerWidth() * index,
-					top: -$("#key .keybtn").outerHeight(),
+				$(this).find("img").attr({
+					src: $(this).find("img").attr("data-src"),
 				});
 				
 				myAudio.src = "audio/raw/" + diao + (index + 1) + ".ogg";
@@ -85,18 +99,13 @@ $(function () {
 					boxShadow: "0 0 3px #333",
 				});
 				
-				$(this).find("img").css({
-					left: -$("#key .keybtn").outerWidth() * index + $("#key .keybtn").outerWidth() * 0.045 * index,
-					top: 0,
+				$(this).find("img").attr({
+					src: $(this).find("img").attr("data-src2"),
 				});
 				
 				$(this).one("mousedown", _arguments.callee);
 				
 			});
-		});
-		
-		$("#key .keybtn .bg_keybtn").each(function (index) {
-			$(this).css("left", -$("#key .keybtn").outerWidth() * index);
 		});
 		
 		$(".extra").find(".back_music").hover(function () {
@@ -115,38 +124,31 @@ $(function () {
 			switch (i) {
 					
 				case "e":
-					diao = "b";
-					flag = false;
+					$("#b").trigger("mousedown");
 					break;
 					
 				case "r":
-					diao = "c";
-					flag = false;
+					$("#c").trigger("mousedown");
 					break;
 					
 				case "t":
-					diao = "d";
-					flag = false;
+					$("#d").trigger("mousedown");
 					break;
 					
 				case "y":
-					diao = "e";
-					flag = false;
+					$("#e").trigger("mousedown");
 					break;
 					
 				case "u":
-					diao = "f";
-					flag = false;
+					$("#f").trigger("mousedown");
 					break;
 					
 				case "i":
-					diao = "f";
-					flag = false;
+					$("#g").trigger("mousedown");
 					break;
 					
 				case "w":
-					diao = "a";
-					flag = false;
+					$("#a").trigger("mousedown");
 					break;
 					
 			};
@@ -200,31 +202,31 @@ $(function () {
 			switch (j) {
 					
 				case "s":
-					$("#do").trigger("mouseup");
+					$("#do").trigger("mouseup").trigger("mouseleave");
 					break;
 					
 				case "d":
-					$("#re").trigger("mouseup");
+					$("#re").trigger("mouseup").trigger("mouseleave");
 					break;
 					
 				case "f":
-					$("#mi").trigger("mouseup");
+					$("#mi").trigger("mouseup").trigger("mouseleave");
 					break;
 				
 				case "g":
-					$("#fa").trigger("mouseup");
+					$("#fa").trigger("mouseup").trigger("mouseleave");
 					break;
 				
 				case "h":
-					$("#so").trigger("mouseup");
+					$("#so").trigger("mouseup").trigger("mouseleave");
 					break;
 				
 				case "j":		
-					$("#la").trigger("mouseup");
+					$("#la").trigger("mouseup").trigger("mouseleave");
 					break;
 				
 				case "k":
-					$("#xi").trigger("mouseup");
+					$("#xi").trigger("mouseup").trigger("mouseleave");
 					break;
 				
 			};	
