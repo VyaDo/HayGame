@@ -52,6 +52,18 @@ $(function () {
 				dLW = $("#divLeft").width(),
 				dLH = $("#divLeft").height();
 	
+	$("#headPhotoBorder").css({
+		width: aLW * 0.42,
+		height: aLW * 0.42,
+		borderRadius: aLW * 0.21,
+	});
+	
+	$("#headPhoto").css({
+		width: aLW * 0.378,
+		height: aLW * 0.378,
+		borderRadius: aLW * 0.189,
+	});
+	
 	$("#canvas_personalInfo").prop({
 		width: aLW,
 		height: aLH,
@@ -141,9 +153,7 @@ $(function () {
 			}
 		];
 		
-		img.onload = function () {
-			fca = cloudAnim(ac, img);
-		};
+		fca = cloudAnim(ac, img);
 		
 		$(document).one("mousemove", function (e) { 
 			var _arguments = arguments;
@@ -225,17 +235,17 @@ $(function () {
 	$("#headPhoto img").on("mouseover", function () {
 		$(this).clearQueue();
 		$(this).animate({
-			width: "175%",
+			width: "105%",
 			height: "105%",
-			left: "-8%",
-			top: "-4%",
+			marginLeft: "-4%",
+			marginTop: "-4%",
 		});
 	}).on("mouseout", function () {
 		$(this).animate({
-			width: "170%",
+			width: "100%",
 			height: "100%",
-			left: "-3%",
-			top: 0,
+			marginLeft: 0,
+			marginTop: 0,
 		});
 	});
 	
@@ -270,14 +280,9 @@ $(function () {
 	ItemCanvasEffectUp("canvas_mySensibility", "#ffa", "最近感悟", "#fc0");
 	
 	
-	$("#canvas_myIntroduction").click(function () {
-		$.ajax({
-			url: "json/myIntroduction.json",
-			dataType: "json",
-			success: function (data, stateText, jqXHR) {
-				var t = $.parseJSON(jqXHR.responseText);
-				$("#article_show").html(t[0]["introduction"]);
-			},
+	$("#canvas_myIntroduction").on("click", function () {
+		$.getJSON("json/myIntroduction.json", function (data, stateText, jqXHR) {
+			$("#article_show").html(data["introduction"]);
 		});
 		$("#screenCover").css({
 			display: "block",
@@ -305,6 +310,102 @@ $(function () {
 			display: "block",
 		});
 		$("#div_stu").fadeIn(500);
+	});
+	
+	
+	$("#articles").on("click", function () {
+		$.ajax({
+			url: "json/myStudy.json",
+			dataType: "json",
+			success: function(data, statusText, jqXHR) {
+				if (data["text"] == "") {
+					$("#list").html("<li>一篇还没有。。</li>");
+				} else {
+					var t = "";
+					for (var i = 0; i < data["text"].length; i ++) {
+						t += "<li>" + data["text"][i] + "</li>";
+					};
+					$("#list").html(t);
+				};
+			},
+		});
+		$(this).off("mouseleave").css({
+			color: "#333",
+			boxShadow: "none",
+		});
+		$("#studyWebsite").css({
+			color: "#ccc",
+			boxShadow: "2px -1px 1px #ccc inset",
+		}).on("mouseleave", function () {
+			$(this).css({
+				color: "#ccc",
+			});
+		});
+	}).on("mouseenter", function () {
+		$(this).css({
+			color: "#333",
+		});
+	});
+	
+	
+	$("#studyWebsite").hover(function () {
+		$(this).css({
+			color: "#333",
+		});
+	}, function () {
+		$(this).css({
+			color: "#ccc",
+		});
+	}).on("click", function () {
+		$.ajax({
+			url: "json/myStudy.json",
+			dataType: "json",
+			success: function(data, statusText, jqXHR) {
+				if (data["website"] == "") {
+					$("#list").html("<li>一篇还没有。。</li>");
+				} else {
+					var t = "";
+					for (var i = 0; i < data["website"].length; i ++) {
+						t += "<li><a href=" + data["website"][i] + " target='_blank'>" + data["website"][i] + "</a></li>";
+					};
+					$("#list").html(t);
+					$("#list").find("li").css({
+						marginBottom: "10px",
+					});
+					$("#list").find("a").hover(function () {
+						$(this).css({
+							color: "#333",
+						});
+					}, function () {
+						$(this).css({
+							color: "#999",
+						});
+					}).css({
+						color: "#999",
+						fontFamily: "微软雅黑",
+						textDecoration: "none",
+					});
+				};
+			},
+		});
+		$(this).off("mouseleave").css({
+			color: "#333",
+			boxShadow: "none",
+		});
+		$("#articles").on("mouseleave", function () {
+			$(this).css({
+				color: "#ccc",
+			});
+		}).css({
+			color: "#ccc",
+			boxShadow: "-2px -1px 1px #ccc inset",
+		});
+	});
+	
+	
+	$("#divWork").css({
+		height: screenW * 0.44,
+		top: (screenH - screenW * 0.44) * 0.5,
 	});
 	
 	
@@ -412,99 +513,7 @@ $(function () {
 			});
 		});
 	};
-	
-	
-	$("#articles").on("click", function () {
-		$.ajax({
-			url: "json/myIntroduction.json",
-			dataType: "json",
-			success: function(data, statusText, jqXHR) {
-				var j = $.parseJSON(jqXHR.responseText);
-				if (j[1]["text"] == "") {
-					$("#list").html("<li>一篇还没有。。</li>");
-				} else {
-					var t = "";
-					for (var i = 0; i < j[1]["text"].length; i ++) {
-						t += "<li>" + j[1]["text"][i] + "</li>";
-					};
-					$("#list").html(t);
-				};
-			},
-		});
-		$(this).off("mouseleave").css({
-			color: "#333",
-			boxShadow: "none",
-		});
-		$("#studyWebsite").css({
-			color: "#ccc",
-			boxShadow: "2px -1px 1px #ccc inset",
-		}).on("mouseleave", function () {
-			$(this).css({
-				color: "#ccc",
-			});
-		});
-	}).on("mouseenter", function () {
-		$(this).css({
-			color: "#333",
-		});
-	});
-	
-	
-	$("#studyWebsite").hover(function () {
-		$(this).css({
-			color: "#333",
-		});
-	}, function () {
-		$(this).css({
-			color: "#ccc",
-		});
-	}).on("click", function () {
-		$.ajax({
-			url: "json/myIntroduction.json",
-			dataType: "json",
-			success: function(data, statusText, jqXHR) {
-				var j = $.parseJSON(jqXHR.responseText);
-				if (j[1]["website"] == "") {
-					$("#list").html("<li>一篇还没有。。</li>");
-				} else {
-					var t = "";
-					for (var i = 0; i < j[1]["website"].length; i ++) {
-						t += "<li><a href=" + j[1]["website"][i] + " target='_blank'>" + j[1]["website"][i] + "</a></li>";
-					};
-					$("#list").html(t);
-					$("#list").find("li").css({
-						marginBottom: "10px",
-					});
-					$("#list").find("a").hover(function () {
-						$(this).css({
-							color: "#333",
-						});
-					}, function () {
-						$(this).css({
-							color: "#999",
-						});
-					}).css({
-						color: "#999",
-						fontFamily: "微软雅黑",
-						textDecoration: "none",
-					});
-				};
-			},
-		});
-		$(this).off("mouseleave").css({
-			color: "#333",
-			boxShadow: "none",
-		});
-		$("#articles").on("mouseleave", function () {
-			$(this).css({
-				color: "#ccc",
-			});
-		}).css({
-			color: "#ccc",
-			boxShadow: "-2px -1px 1px #ccc inset",
-		});
-	});
-	
+		
 	
 	$("#game").find("article").find("img").css({
 		width: $("#game").width() * 0.2,
@@ -584,7 +593,7 @@ $(function () {
 	
 	$("#div_moreApplication").css({
 		width: aRW * 0.55,
-		height: aRW * 0.3 * 2,
+		height: aRW * 0.6,
 		right: -aRW * 0.3,
 		bottom: 0,
 		fontFamily: "微软雅黑",
@@ -704,19 +713,22 @@ $(function () {
 	
 	
 	// 云动画
-	function cloudAnim(ac, img) {
-		var	c = document.getElementById("cloud"),
-					ctx = c.getContext("2d");
-		var cloudAnimate = setInterval(function () {
-			ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
-			for (var i = 0; i < ac.length; i ++) {
-				ac[i]["cx"] -= 3;
-				if (ac[i]["cx"] < - ac[0]["cw"]) {
-					ac[i]["cx"] = 2430;
-				}
-				ctx.drawImage(img, ac[i]["cx"], ac[i]["cy"], ac[i]["cw"], ac[i]["ch"]);
-			};
-		}, 40);
+	function cloudAnim(a, p) {
+		var cloudAnimate;
+		p.onload = function () {
+			var	c = document.getElementById("cloud"),
+						ctx = c.getContext("2d");
+			cloudAnimate = window.setInterval(function () {
+				ctx.clearRect(0, 0, $("#cloud").prop("width"), $("#cloud").prop("height"));
+				for (var i = 0; i < a.length; i ++) {
+					a[i]["cx"] -= 3;
+					if (a[i]["cx"] < - a[0]["cw"]) {
+						a[i]["cx"] = 2430;
+					}
+					ctx.drawImage(p, a[i]["cx"], a[i]["cy"], a[i]["cw"], a[i]["ch"]);
+				};
+			}, 40);
+		};
 		return cloudAnimate;
 	};
 
