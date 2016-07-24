@@ -1,0 +1,34 @@
+{
+	"work_paint": [
+		{
+			"name":"我的手机",
+			"url":"img/my_works_01s.jpg",
+			"date":"2013-11-29",
+			"size":"1000×856"
+		},
+		{
+			"name":"网格字",
+			"url":"img/my_works_02s.jpg",
+			"date":"2013-03-30",
+			"size":"400×400"
+		},
+		{
+			"name":"足球",
+			"url":"img/my_works_03s.jpg",
+			"date":"2013-06-02",
+			"size":"1000×1000"
+		}
+	],
+	"work_code": [],
+	"yellow": [],
+	"green": [],
+	"blue": []
+}
+
+
+
+
+
+
+
+
