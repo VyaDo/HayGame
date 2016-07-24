@@ -13,7 +13,6 @@ $(function () {
 		};
 	};
 	
-	
 	var incr = 60;
 	var screenW = window.screen.availWidth || document.documentElement.clientHeight;
 	var screenH = (window.screen.availHeight - window.outerHeight + window.innerHeight || document.documentElement.clientHeight) * 1.04;
@@ -73,6 +72,11 @@ $(function () {
 	$("#divLeft .div_personalInfoItem .canvas_personalInfoItem").prop({
 		width: dLW * 0.5,
 		height: dLH * 0.09,
+	});
+	
+	$(".infoC").css({
+		paddingLeft: $(".infoC").css("padding-top"),
+		paddingRight: $(".infoC").css("padding-top"),
 	});
 	
 	$("#div_myApplication").css({
@@ -306,7 +310,7 @@ $(function () {
 	});
 	
 	
-	$("#div_myStudy").on("click", function () {
+	$("#canvas_myStudy").on("click", function () {
 		$("#articles").trigger("click");
 		$("#screenCover").css({
 			display: "block",
@@ -405,14 +409,278 @@ $(function () {
 	});
 	
 	
+	$("#canvas_myWorks").on("click", function () {
+		$("#divWork").fadeIn(300);
+	});
+	
 	$("#divWork").css({
 		height: screenW * 0.44,
+		left: screenW * 0.022,
 		top: (screenH - screenW * 0.44) * 0.5,
+	});
+	
+	
+	$("#workClose").hover(function () {
+		$(this).css({
+			backgroundImage: "url(img/closeButton_hover.png)",
+		});
+	}, function () {
+		$(this).css({
+			backgroundImage: "url(img/closeButton_normal.png)",
+		});
+	}).on("mousedown", function () {
+		$(this).css({
+			backgroundImage: "url(img/closeButton_down.png)",
+		});
+	}).on("mouseup", function () {
+		$(this).css({
+			backgroundImage: "url(img/closeButton_normal.png)",
+		});
+		$("#divWork").fadeOut(300);
+	});
+	
+	$(".workTag").css({
+		lineHeight: screenW * 0.44 * 0.075 + "px",
+	});
+	
+	
+	tagClick("work_code");
+	
+	tagClick("work_paint", function (data, id, index) {
+		$(".pC").eq(index).find(".imgC").css({
+			backgroundImage: "url(" + data[id][index]["url"] + ")",
+		}).attr({
+			dataURL: data[id][index]["url"].substring(0, data[id][index]["url"].length - 5) + ".jpg",
+			dataName: data[id][index]["name"],
+			dataIndex: index,
+			dataTotal: data[id].length,
+		});
+		$(".pC").eq(index).find(".worksInfo").eq(0).html("名称：" + data[id][index]["name"]);
+		$(".pC").eq(index).find(".worksInfo").eq(1).html("尺寸：" + data[id][index]["size"]);
+		$(".pC").eq(index).find(".worksInfo").eq(2).html("日期：" + data[id][index]["date"]);
+	});
+	
+	tagClick("yellow");
+	tagClick("green");
+	tagClick("blue");
+	
+	
+	function tagClick (id, fn) {
+		$("#" + id).on("click", function () {
+			var $this = $(this);
+			$.ajax({
+				url: "json/myWorks.json",
+				dataType: "json",
+				success: function (data) {
+					$(".pC").each(function (index) {
+						if (data[id][index]) {
+							$(this).css({
+								display: "block",
+							});
+							if (fn) fn(data, id, index);
+						} else {
+							$(this).css({
+								display: "none",
+							});
+						};
+					});
+				},
+			});
+			$this.css({
+				zIndex: 3,
+				color: $this.attr("data-color"),
+				backgroundColor: "#ffa",
+			});
+			$this.siblings(".workTag").each(function () {
+				$(this).css({
+					zIndex: 1,
+					color: "white",
+					backgroundColor: $(this).attr("data-color"),
+				});
+			});
+		});
+	};
+	
+	
+	$(".pC").each(function () {
+		$(this).hover(function () {
+			$(this).find(".worksInfo").css({
+				color: "#333",
+			});
+		}, function () {
+			$(this).find(".worksInfo").css({
+				color: "#ccc",
+			});
+			$(this).css({
+				boxShadow: "1px 1px 3px #777",
+			});
+		}).on("mousedown", function () {
+			$(this).css({
+				boxShadow: "0 0 1px #777",
+			});
+		}).on("mouseup", function () {
+			var $this = $(this);
+			var img = new Image();
+
+			$this.css({
+				boxShadow: "1px 1px 3px #777",
+			});
+			$("#screenCover").css({
+				display: "block",
+			});
+			$("#picBrowser").fadeIn(300);
+			
+			$(img).attr({
+				src: $this.find(".imgC").attr("dataURL"),
+				dataName: $this.find(".imgC").attr("dataName"),
+				dataIndex: $this.find(".imgC").attr("dataIndex"),
+				dataTotal: $this.find(".imgC").attr("dataTotal"),
+			});
+			
+			img.onload = function () {
+				$("#picBrowser").find("img").remove();
+				$("#picBrowser").prepend(img);
+				$("#pN").html($(img).attr("dataName"));
+				$("#pI").html(parseInt($(img).attr("dataIndex")) + 1 + " / " + $(img).attr("dataTotal"));
+				imgInt();
+			};
+		});
+	});
+	
+	
+	$("#lt").on("click", function () {
+		var img = new Image();
+		var index = parseInt($("#picBrowser").find("img").attr("dataIndex"));
+		var total = parseInt($("#picBrowser").find("img").attr("dataTotal"));
+		index = index === 0 ? total - 1 : index - 1;
+		picChange(index, img);
+	});
+	
+	$("#gt").on("click", function () {
+		var img = new Image();
+		var index = parseInt($("#picBrowser").find("img").attr("dataIndex"));
+		var total = parseInt($("#picBrowser").find("img").attr("dataTotal"));
+		index = index === total - 1 ? 0 : index + 1;
+		picChange(index, img);
+	});
+	
+	function picChange(index, img) {
+		$.ajax({
+			url: "json/myWorks.json",
+			dataType: "json",
+			success: function (data) {
+				$(img).attr({
+					src: data["work_paint"][index]["url"].substring(0, data["work_paint"][index]["url"].length - 5) + ".jpg",
+					dataName: data["work_paint"][index]["name"],
+					dataIndex: index,
+					dataTotal: data["work_paint"].length,
+				});
+			},
+		});
+
+		img.onload = function () {
+			$("#picBrowser").find("img").remove();
+			$("#picBrowser").prepend(img);
+			$("#pN").html($(img).attr("dataName"));
+			$("#pI").html(parseInt($(img).attr("dataIndex")) + 1 + " / " + $(img).attr("dataTotal"));
+			imgInt();
+		};
+	};
+	
+	(function () {
+		var picBrowser = document.getElementById("picBrowser");
+		var img;
+		
+		$("#picBrowser").css({
+			left: (screenW - $("#picBrowser").width()) * 0.5,
+			top: (screenH - $("#picBrowser").height()) * 0.5,
+		});
+		
+		addMouseWheel(picBrowser, function () {
+			img = $("#picBrowser").find("img");
+			img.css({
+				width: img.width() * 1.1,
+				height: img.height() * 1.1,
+				left: img.position().left - img.width() * 0.05,
+				top: img.position().top - img.height() * 0.05,
+			});
+		}, "up");
+		addMouseWheel(picBrowser, function () {
+			img = $("#picBrowser").find("img");
+			img.css({
+				width: img.width() * 0.9,
+				height: img.height() * 0.9,
+				left: img.position().left + img.width() * 0.05,
+				top: img.position().top + img.height() * 0.05,
+			});
+		}, "down");
+		
+	})();
+	
+	function imgInt() {
+		var w = $("#picBrowser").width();
+		var h = $("#picBrowser").height();
+		var pw = $("#picBrowser").find("img").width();
+		var ph = $("#picBrowser").find("img").height();
+		
+		if (pw <= w && ph <= h) {
+			$("#picBrowser").find("img").css({
+				left: (w - pw) * 0.5,
+				top: (h - ph) * 0.5,
+			})
+		} else if (pw <= w && ph > h) {
+			$("#picBrowser").find("img").css({
+				width: pw * h / ph,
+				height: h,
+				left: (w - pw * h / ph) * 0.5,
+				top: 0,
+			});
+		} else if (pw > w && ph <= h) {
+			$("#picBrowser").find("img").css({
+				width: w,
+				height: ph * w / pw,
+				left: 0,
+				top: (h - ph * w / pw) * 0.5,
+			});
+		} else if (pw > w && ph > h) {
+			var a = w / pw;
+			var b = h / ph;
+			if (a <=  b) {
+				$("#picBrowser").find("img").css({
+					width: w,
+					height: ph * a,
+					left: 0,
+					top: (h - ph * a) * 0.5,
+				});
+			} else if (a > b) {
+				$("#picBrowser").find("img").css({
+					width: pw * b,
+					height: h,
+					left: (w - pw * b) * 0.5,
+					top: 0,
+				});
+			};
+		};
+	};
+	
+	$("#lt, #gt").hover(function () {
+		$(this).find(".pd").fadeIn(200);
+	}, function () {
+		$(this).find(".pd").fadeOut(200);
+	});
+	
+	$("#lt").on("click", function () {
+		
+	});
+	
+	$("#gt").on("click", function () {
+		
 	});
 	
 	
 	$("#screenCover").on("click", function (e) {
 		$("#div_stu").fadeOut(500);
+		$("#picBrowser").fadeOut(500);
 		$("#moreAppWin").fadeOut(500);
 		$("#article_show").animate({
 			opacity: 0,
@@ -540,17 +808,19 @@ $(function () {
 	
 	(function () {
 		var n = 0;
+		var div_myApplication = document.getElementById("div_myApplication"); 
+		
 		$("#div_myApplication").on("mousedown", function (ed) {
 			$(this).on("mousemove", function (em) {
 				if (em.pageY - ed.pageY > 30) {
-					++n;
+					++ n;
 					$(this).off("mousemove");
 					$(this).css({
 						transform: "rotate(" + (-60 * n) + "deg)",
 					});
 				};
 				if (em.pageY - ed.pageY < -30) {
-					--n;
+					-- n;
 					$(this).off("mousemove");
 					$(this).css({
 						transform: "rotate(" + (-60 * n) + "deg)",
@@ -561,6 +831,21 @@ $(function () {
 				$(this).off("mousemove");
 			});
 		});
+		
+		addMouseWheel(div_myApplication, function () {
+			-- n;
+			$("#div_myApplication").css({
+				transform: "rotate(" + (-60 * n) + "deg)",
+			});
+		}, "up");
+		
+		addMouseWheel(div_myApplication, function () {
+			++ n;
+			$("#div_myApplication").css({
+				transform: "rotate(" + (-60 * n) + "deg)",
+			});
+		}, "down");
+		
 	})();
 	
 	// .app定位
