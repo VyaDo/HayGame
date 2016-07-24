@@ -4,7 +4,6 @@ body {
 	-webkit-user-select: none;
 	-o-user-select: none;	
 	-moz-user-select: none;
-	width: 100%;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -118,23 +117,60 @@ body {
 	float: left;
 }
 #divWork {
-	width: 100%;
+	width: 90%;
 	position: absolute;
 	left: 0;
 	overflow: hidden;
+	display: none;
+	cursor: default;
 }	
-#divWork .workTag {
+#workClose {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 10px;
+	background-image: url(../img/closeButton_normal.png);
+}
+.workTag {
 	width: 7%;
 	height: 15%;
 	border-radius: 8px 0 0 8px;
-	background-color: #ffa;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	font-weight: bold;
 	position: absolute;
-	left: 0;
-	box-shadow: 0 2px 3px #666;
+	text-align: center;
+	left: 2px;
+	box-shadow: -2px 2px 1px rgba(100, 100, 100, 0.75);
+	cursor: pointer;
 }
 #work_code {
+	color: red;
+	background-color: #ffa;
 	top: 50px;
-	z-index: 4;
+	z-index: 3;
+}
+#work_paint {
+	background-color: orange;
+	top: 141px;
+	z-index: 1;
+}
+#yellow {
+	background-color: yellow;
+	top: 232px;
+	z-index: 1;
+}
+#green {
+	background-color: green;
+	top: 323px;
+	z-index: 1;
+}
+#blue {
+	background-color: blue;
+	top: 414px;
+	z-index: 1;
 }
 #codeCont {
 	width: 92%;
@@ -144,22 +180,46 @@ body {
 	top: 1%;
 	border-radius: 0 100px 0 0;
 	background-color: #ffa;
-	box-shadow: 0px 0px 6px #666;
-	z-index: 3;
-}
-#work_paint {
-	top: 141px;
 	z-index: 2;
+	box-shadow: 0px 2px 6px #666;
 }
-#paintCont {
-	width: 92%;
-	height: 98%;
-	position: absolute;
-	right: 1%;
-	top: 1%;
-	border-radius: 0 100px 0 0;
-	background-color: #ffa;
-	z-index: 1;
+.transC{
+	width: 90%;
+	height: 80%;
+	margin: 5% auto;
+}
+.pC {
+	width: 100%;
+	height: 23%;
+	margin-bottom: 2%;
+	box-shadow: 1px 1px 3px #777;
+	background-color: #fff;
+	float: left;
+	display: none;
+}
+.imgC {
+	width: 30%;
+	height: 100%;
+	float: left;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.infoC{
+	width: 70%;
+	height: 100%;
+	padding-top: 2.5%;
+	padding-bottom: 2.5%;
+	float: left;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	font-family: "微软雅黑";
+}
+.worksInfo {
+	text-overflow: ellipsis;
+	font-family: "微软雅黑";
+	line-height: 28px;
+	font-size: 16px;
+	color: #bbb;
 }
 #moreAppWin {
 	width: 100%;
@@ -328,6 +388,58 @@ body {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+#picBrowser {
+	width:800px ;
+	height:600px ;
+	position: absolute;
+	background-color: black;
+	border-radius: 20px;
+	overflow: hidden;
+	display: none;
+	z-index: 1000;
+}
+#picBrowser img {
+	position: absolute;
+}
+.at {
+	position:absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	line-height: 550px;
+	cursor: default;
+}
+.pd {
+	color: #fff;
+	font-size: 100px;
+	font-family:"Book Antiqua", Palatino, serif;
+	font-weight: bold;
+	float: left;
+	margin-left: 20px;
+	display: none;
+}
+#index {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	width: 100%;
+	height: 8%;
+}
+#pN {
+	float: left;
+	line-height: 44px;
+	padding-left: 20px;
+	color: white;
+	cursor: default;
+}
+#pI {
+	float: right;
+	line-height: 44px;
+	padding-right: 20px;
+	color: white;
+	cursor: default;
 }
 #screenCover {
 	width: 100%;
