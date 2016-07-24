@@ -6,6 +6,7 @@
 		<title>Hay Game</title>
 		
 		<script src="js/jquery_3.0.0.min.js"></script>
+		<script src="js/mouseWheelEvent.js"></script>
 		<script src="js/hg.js"></script>
 		<script src="js/musicApp.js"></script>
 		<script src="js/drawApp.js"></script>
@@ -67,12 +68,58 @@
 				</div>
 			</div>
 			
-			<!--<div id="divWork">
-				<div id="work_code" class="workTag"></div>
-				<div id="codeCont"></div>
-				<div id="work_paint" class="workTag"></div>
-				<div id="paintCont"></div>
-			</div>-->
+			<div id="divWork">
+				<div id="workClose"></div>
+				<div id="work_code" class="workTag" data-color="red">空白</div>
+				<div id="work_paint" class="workTag" data-color="orange">绘画</div>
+				<div id="yellow" class="workTag" data-color="yellow">空白</div>
+				<div id="green" class="workTag" data-color="green">空白</div>
+				<div id="blue" class="workTag" data-color="blue">空白</div>
+				<div id="codeCont">
+					<div class="transC">
+						<div class="pC" style="border-radius: 0 100px 0 0;">
+							<div class="imgC"></div>
+							<div class="infoC" style="border-radius: 0 100px 0 0;">
+								<ul>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="pC">
+							<div class="imgC"></div>
+							<div class="infoC">
+								<ul>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="pC">
+							<div class="imgC"></div>
+							<div class="infoC">
+								<ul>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="pC">
+							<div class="imgC"></div>
+							<div class="infoC">
+								<ul>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+									<li class="worksInfo"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			<div id="moreAppWin">
 				<span class="arrow" id="leftArrow">
@@ -189,6 +236,19 @@
 						</div>				
 					</article>
 				</aside>
+		</div>
+		
+		<div id="picBrowser">
+			<div id="lt" class="at" style="left: 0;">
+				<span class="pd" style="padding-left: 30px;">&lt;</span>
+			</div>
+			<div id="gt" class="at" style="right: 0;">
+				<span class="pd" style="padding-left: 260px;">&gt;</span>
+			</div>
+			<div id="index">
+				<span id="pN"></span>
+				<span id="pI"></span>
+			</div>
 		</div>
 		
 		<div id="screenCover"></div>
